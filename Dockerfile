@@ -33,19 +33,11 @@ RUN install /tmp/yq_linux_amd64 /usr/local/bin/yq && \
   rm -f /tmp/yq_linux_amd64
 
 
-
-
-# Add CF Community Plugin Repo
-#RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-
-# CF MultiApps Plugin
-#RUN cf install-plugin -f multiapps
-
 #Download and Install MultiApp plugin
-ADD https://github.com/cloudfoundry-incubator/multiapps-cli-plugin/releases/download/v2.2.1/mta_plugin_linux_amd64 /tmp/mta_plugin_linux_amd64
-RUN chmod +x /tmp/mta_plugin_linux_amd64 && \
-   cf install-plugin /tmp/mta_plugin_linux_amd64 -f && \
-   rm -f /tmp/mta_plugin_linux_amd64
+ADD https://github.com/cosmo83/multiapps-cli-plugin/releases/download/v2.2.1/mta_plugin_static_linux_amd64
+RUN chmod +x /tmp/mta_plugin_static_linux_amd64 && \
+   cf install-plugin /tmp/mta_plugin_static_linux_amd64 -f && \
+   rm -f /tmp/mta_plugin_static_linux_amd64
 
 # NPM Install of SAP Cloud MTA Build Required for our setup
 RUN npm install -g mbt
