@@ -10,11 +10,15 @@ RUN apk --update add openssh-client git nodejs  npm && rm -rf /var/cache/apk/* &
     npm install -g grunt-cli
 
 # Install Cloud Foundry cli
-ADD https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.45.0 /tmp/cf-cli.tgz
+ADD "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" /tmp/cf-cli.tgz
 RUN mkdir -p /usr/local/bin && \
   tar -xzf /tmp/cf-cli.tgz -C /usr/local/bin && \
   cf --version && \
-  rm -f /tmp/cf-cli.tgz
+  rm -f /tmp/cf-cli.tgz && \
+  rm -f /usr/local/bin/LICENSE && \
+  rm -f /usr/local/bin/NOTICE
+
+
 
 # Install cf cli Autopilot plugin
 ADD https://github.com/contraband/autopilot/releases/download/0.0.8/autopilot-linux /tmp/autopilot-linux
@@ -33,4 +37,8 @@ RUN install /tmp/yq_linux_amd64 /usr/local/bin/yq && \
 RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
 
 # CF MultiApps Plugin
-RUN cf install-plugin -f multiapps 
+RUN cf install-plugin -f multiapps
+
+
+# NPM Install of SAP Cloud MTA Build Required for our setup
+RUN npm install -g mbt
