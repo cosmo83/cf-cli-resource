@@ -5,6 +5,9 @@ ADD itest/ /opt/itest/
 
 # Install uuidgen
 RUN apk add --no-cache ca-certificates curl bash jq util-linux
+#Install grunt
+RUN apk --update add openssh-client git nodejs && rm -rf /var/cache/apk/* && \
+    npm install -g grunt-cli
 
 # Install Cloud Foundry cli
 ADD https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.45.0 /tmp/cf-cli.tgz
