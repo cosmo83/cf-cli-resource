@@ -40,4 +40,4 @@ RUN chmod +x /tmp/mta_plugin_static_linux_amd64 && \
    rm -f /tmp/mta_plugin_static_linux_amd64
 
 # NPM Install of SAP Cloud MTA Build Required for our setup
-RUN npm install -g mbt
+RUN npm install -g mbt --unsafe-perm=true --allow-root
