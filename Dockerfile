@@ -27,3 +27,10 @@ ADD https://github.com/mikefarah/yq/releases/download/2.3.0/yq_linux_amd64 /tmp/
 RUN install /tmp/yq_linux_amd64 /usr/local/bin/yq && \
   yq --version && \
   rm -f /tmp/yq_linux_amd64
+
+
+# Add CF Community Plugin Repo
+cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
+
+# CF MultiApps Plugin
+cf install-plugin multiapps
