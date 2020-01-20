@@ -6,7 +6,7 @@ ADD itest/ /opt/itest/
 # Install uuidgen
 RUN apk add --no-cache ca-certificates curl bash jq util-linux
 #Install grunt
-RUN apk --update add openssh-client git nodejs && rm -rf /var/cache/apk/* && \
+RUN apk --update add openssh-client git nodejs  npm && rm -rf /var/cache/apk/* && \
     npm install -g grunt-cli
 
 # Install Cloud Foundry cli
