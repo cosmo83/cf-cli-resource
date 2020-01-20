@@ -33,4 +33,4 @@ RUN install /tmp/yq_linux_amd64 /usr/local/bin/yq && \
 RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
 
 # CF MultiApps Plugin
-RUN cf install-plugin multiapps
+RUN cf install-plugin -f multiapps 
