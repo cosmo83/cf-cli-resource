@@ -408,7 +408,8 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     [ "$staging_timeout" -gt "0" ] && export CF_STAGING_TIMEOUT=$staging_timeout
     [ "$startup_timeout" -gt "0" ] && export CF_STARTUP_TIMEOUT=$startup_timeout
 
-    cf deploy -f "mta_archives/{$app}_${app_vers}.mtar"
+    logger::info "Executing cf deploy"
+    cf deploy -f "mta_archives/${app_name}_${app_vers}.mtar"
 
     unset CF_STAGING_TIMEOUT
     unset CF_STARTUP_TIMEOUT
