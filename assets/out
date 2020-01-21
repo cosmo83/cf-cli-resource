@@ -371,7 +371,7 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     app_vers=$(echo $options | jq -r '.app_vers //empty')
     staging_timeout=$(echo $options | jq -r '.staging_timeout //0')
     startup_timeout=$(echo $options | jq -r '.startup_timeout //0')
-    
+
     args=()
     # [ -n "$app_name" ]        && args+=("$app_name")
     # [ -n "$buildpack" ]       && args+=(-b "$buildpack")
@@ -408,6 +408,8 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     [ "$staging_timeout" -gt "0" ] && export CF_STAGING_TIMEOUT=$staging_timeout
     [ "$startup_timeout" -gt "0" ] && export CF_STARTUP_TIMEOUT=$startup_timeout
 
+    logger::info "Changing into Directory"
+    cd $app_name
     cf deploy "mta_archives/*.mtar"
 
     unset CF_STAGING_TIMEOUT
