@@ -369,7 +369,9 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
   elif [ "deploy" = "$command" ]; then
     app_name=$(echo $options | jq -r '.app_name //empty')
     app_vers=$(echo $options | jq -r '.app_vers //empty')
-
+    staging_timeout=$(echo $options | jq -r '.staging_timeout //0')
+    startup_timeout=$(echo $options | jq -r '.startup_timeout //0')
+    
     args=()
     # [ -n "$app_name" ]        && args+=("$app_name")
     # [ -n "$buildpack" ]       && args+=(-b "$buildpack")
