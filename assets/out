@@ -398,12 +398,12 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     done
 
     logger::info "Changing into Directory"
-    cd "/$app_name"
+    cd $app_name
     logger::info "Executing mbt-build"
     mbt build
 
-    logger::info "Changing into Directory"
-    cd "/$app_name"
+    #logger::info "Changing into Directory"
+    #cd "/$app_name"
 
     logger::info "Executing $(logger::highlight "$command"): $app_name"
     cf_target "$org" "$space"
