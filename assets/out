@@ -402,16 +402,13 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     logger::info "Executing mbt-build"
     mbt build
 
-    logger::info "Changing into Directory"
-    cd $app_name
-
     logger::info "Executing $(logger::highlight "$command"): $app_name"
     cf_target "$org" "$space"
 
     [ "$staging_timeout" -gt "0" ] && export CF_STAGING_TIMEOUT=$staging_timeout
     [ "$startup_timeout" -gt "0" ] && export CF_STARTUP_TIMEOUT=$startup_timeout
 
-    cf deploy "mta_archives/*.mtar"
+    cf deploy "mta_archives/{$app}_${app_vers}.mtar"
 
     unset CF_STAGING_TIMEOUT
     unset CF_STARTUP_TIMEOUT
