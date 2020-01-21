@@ -1,12 +1,13 @@
-FROM alpine:3.8
+FROM ubuntu:18.04
 
 ADD assets/ /opt/resource/
 ADD itest/ /opt/itest/
 
 # Install uuidgen
-RUN apk add --no-cache ca-certificates curl bash jq util-linux
+RUN apt-get update
+RUN apt-get install ca-certificates curl bash jq util-linux
 #Install grunt
-RUN apk --update add openssh-client git nodejs  npm && rm -rf /var/cache/apk/* && \
+RUN apt-get install openssh-client git nodejs  npm \
     npm install -g grunt-cli
 
 # Install Cloud Foundry cli
@@ -39,5 +40,8 @@ RUN chmod +x /tmp/mta_plugin_static_linux_amd64 && \
    cf install-plugin /tmp/mta_plugin_static_linux_amd64 -f && \
    rm -f /tmp/mta_plugin_static_linux_amd64
 
+
+
 # NPM Install of SAP Cloud MTA Build Required for our setup
 RUN npm install -g mbt --unsafe-perm=true --allow-root
+RUN npm config set @sap:registry https://npm.sap.com
