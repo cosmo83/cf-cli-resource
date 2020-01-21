@@ -5,9 +5,9 @@ ADD itest/ /opt/itest/
 
 # Install uuidgen
 RUN apt-get update
-RUN apt-get install ca-certificates curl bash jq util-linux
+RUN apt-get install -y ca-certificates curl bash jq util-linux
 #Install grunt
-RUN apt-get install openssh-client git nodejs  npm \
+RUN apt-get install -y openssh-client git nodejs  npm \
     npm install -g grunt-cli
 
 # Install Cloud Foundry cli
