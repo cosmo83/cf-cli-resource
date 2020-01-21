@@ -413,8 +413,6 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
 
     unset CF_STAGING_TIMEOUT
     unset CF_STARTUP_TIMEOUT
-    [ -n "$docker_password" ]   && unset CF_DOCKER_PASSWORD
-
 
 
   elif [ "zero-downtime-push" = "$command" ]; then
