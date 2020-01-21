@@ -367,11 +367,13 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     [ -n "$docker_password" ]   && unset CF_DOCKER_PASSWORD
 
   elif [ "deploy" = "$command" ]; then
-    app_name=$(echo $options | jq -r '.app_name //empty')
-    app_vers=$(echo $options | jq -r '.app_vers //empty')
+    mta_file=$(echo $options | jq -r '.mta_file //empty')
+    #app_name=$(echo $options | jq -r '.app_name //empty')
+    #app_vers=$(echo $options | jq -r '.app_vers //empty')
     staging_timeout=$(echo $options | jq -r '.staging_timeout //0')
     startup_timeout=$(echo $options | jq -r '.startup_timeout //0')
-
+    app_name=$(yq r $mta_file ID)
+    app_vers=$(yq r $mta_file version)
     args=()
     # [ -n "$app_name" ]        && args+=("$app_name")
     # [ -n "$buildpack" ]       && args+=(-b "$buildpack")
