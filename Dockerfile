@@ -7,8 +7,8 @@ ADD itest/ /opt/itest/
 RUN apt-get update
 RUN apt-get install -y ca-certificates curl bash jq util-linux
 #Install grunt
-RUN apt-get install -y openssh-client git nodejs  npm \
-    npm install -g grunt-cli
+RUN apt-get install -y openssh-client git nodejs  npm
+RUN npm install -g grunt-cli
 
 # Install Cloud Foundry cli
 ADD "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" /tmp/cf-cli.tgz
