@@ -7,8 +7,8 @@ ADD itest/ /opt/itest/
 RUN apt-get update
 RUN apt-get install -y ca-certificates curl bash jq util-linux
 #Install grunt
-RUN apt-get install -y openssh-client git nodejs  npm
-RUN npm install -g grunt-cli
+RUN apt-get install -y git nodejs npm node-grunt-cli
+
 
 # Install Cloud Foundry cli
 ADD "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" /tmp/cf-cli.tgz
@@ -35,11 +35,10 @@ RUN install /tmp/yq_linux_amd64 /usr/local/bin/yq && \
 
 
 #Download and Install MultiApp plugin
-ADD https://github.com/cosmo83/multiapps-cli-plugin/releases/download/v2.2.1/mta_plugin_static_linux_amd64 /tmp/mta_plugin_static_linux_amd64
-RUN chmod +x /tmp/mta_plugin_static_linux_amd64 && \
-   cf install-plugin /tmp/mta_plugin_static_linux_amd64 -f && \
-   rm -f /tmp/mta_plugin_static_linux_amd64
-
+ADD https://github.com/cloudfoundry-incubator/multiapps-cli-plugin/releases/download/v2.2.1/mta_plugin_linux_amd64 /tmp/mta_plugin_linux_amd64
+RUN chmod +x /tmp/mta_plugin_linux_amd64 && \
+   cf install-plugin /tmp/mta_plugin_linux_amd64 -f && \
+   rm -f /tmp/mta_plugin_linux_amd64
 
 
 # NPM Install of SAP Cloud MTA Build Required for our setup
