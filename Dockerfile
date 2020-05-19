@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 #Changed from 18.04 to 20.04
-
+ARG DEBIAN_FRONTEND=noninteractive 
 ADD assets/ /opt/resource/
 ADD itest/ /opt/itest/
 
