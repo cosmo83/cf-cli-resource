@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+#Changed from 18.04 to 20.04
 
 ADD assets/ /opt/resource/
 ADD itest/ /opt/itest/
