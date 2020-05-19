@@ -36,12 +36,12 @@ RUN install /tmp/yq_linux_amd64 /usr/local/bin/yq && \
 
 
 #Download and Install MultiApp plugin
-ADD https://github.com/cloudfoundry-incubator/multiapps-cli-plugin/releases/download/v2.2.1/mta_plugin_linux_amd64 /tmp/mta_plugin_linux_amd64
+ADD https://github.com/cloudfoundry-incubator/multiapps-cli-plugin/releases/download/v2.4.1/mta_plugin_linux_amd64 /tmp/mta_plugin_linux_amd64
 RUN chmod +x /tmp/mta_plugin_linux_amd64 && \
    cf install-plugin /tmp/mta_plugin_linux_amd64 -f && \
    rm -f /tmp/mta_plugin_linux_amd64
 
 
 # NPM Install of SAP Cloud MTA Build Required for our setup
-RUN npm install -g mbt --unsafe-perm=true --allow-root
 RUN npm config set @sap:registry https://npm.sap.com
+RUN npm install --no-cache -g mbt --unsafe-perm=true --allow-root

@@ -401,6 +401,8 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
 
     logger::info "Changing into Directory"
     cd $app_name
+    logger::info "Executing Cache Clean"
+    npm cache clean --force
     logger::info "Executing mbt-build"
     mbt build
 
