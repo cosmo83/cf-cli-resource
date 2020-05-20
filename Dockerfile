@@ -45,4 +45,4 @@ RUN chmod +x /tmp/mta_plugin_linux_amd64 && \
 # NPM Install of SAP Cloud MTA Build Required for our setup
 RUN npm config set @sap:registry https://npm.sap.com
 RUN npm install -g mbt --unsafe-perm=true --allow-root
-RUN npm install -g ui5 --unsafe-perm=true --allow-root
+RUN npm install -g @ui5/cli --unsafe-perm=true --allow-root
