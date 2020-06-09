@@ -432,7 +432,7 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     [ "$startup_timeout" -gt "0" ] && export CF_STARTUP_TIMEOUT=$startup_timeout
 
     logger::info "Changing into ui_deployer Directory"
-    cd $app_name'_ui_deployer'
+	cd $app_name'_ui_deployer/resources'
     logger::info "Executing cf html5-push"
     cf html5-push -r 
 
