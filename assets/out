@@ -401,10 +401,6 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
 
     logger::info "Changing into Directory"
     cd $app_name
-    logger::info "Executing Cache Clean"
-    npm cache clean --force
-    logger::info "Executing npm install"
-    npm install
     logger::info "Executing mbt-build"
     mbt build
 
@@ -420,6 +416,28 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     unset CF_STAGING_TIMEOUT
     unset CF_STARTUP_TIMEOUT
 
+  elif [ "html5-push" = "$command" ]; then
+    mta_file=$(echo $options | jq -r '.mta_file //empty')
+    app_name=$(yq r $mta_file ID)
+    deployer_name=$app_name'_ui_deployer'
+    logger::info "Changing into Directory"
+    cd $app_name
+    logger::info "Executing mbt-build"
+    mbt build
+
+    logger::info "Executing $(logger::highlight "$command"): $app_name"
+    cf_target "$org" "$space"
+
+    [ "$staging_timeout" -gt "0" ] && export CF_STAGING_TIMEOUT=$staging_timeout
+    [ "$startup_timeout" -gt "0" ] && export CF_STARTUP_TIMEOUT=$startup_timeout
+
+    logger::info "Changing into ui_deployer Directory"
+    cd $app_name'_ui_deployer'
+    logger::info "Executing cf html5-push"
+    cf html5-push -r 
+
+    unset CF_STAGING_TIMEOUT
+    unset CF_STARTUP_TIMEOUT
 
   elif [ "zero-downtime-push" = "$command" ]; then
     manifest=$(echo $options | jq -r '.manifest //empty')
