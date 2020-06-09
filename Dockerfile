@@ -41,7 +41,7 @@ RUN chmod +x /tmp/mta_plugin_linux_amd64 && \
    cf install-plugin /tmp/mta_plugin_linux_amd64 -f && \
    rm -f /tmp/mta_plugin_linux_amd64
 
-RUN cf install-plugin -r CF-Community html5-plugin
+RUN cf install-plugin -r CF-Community html5-plugin -f
 
 # NPM Install of SAP Cloud MTA Build Required for our setup
 RUN npm config set @sap:registry https://npm.sap.com
