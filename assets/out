@@ -439,7 +439,14 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
 	cd $app_name'_ui_deployer/resources'
     logger::info "Executing cf html5-push"
     cf html5-push -r 
-    cf run-task $launchpad_app npm start -m $launchpad_mem
+    launchpad_green=$(echo $launchpad_app'-green')
+    launchpad_blue=$(echo $launchpad_app'-blue')
+    cmd1="cf run-task $launchpad_green npm start -m $launchpad_mem"
+    cmd2="cf run-task $launchpad_blue npm start -m $launchpad_mem"
+    $cmd1
+    cmd_status=$?
+    [ $cmd_status -eq 0 ] && echo "$cmd1 command was successful" || $cmd2
+
 
     unset CF_STAGING_TIMEOUT
     unset CF_STARTUP_TIMEOUT
