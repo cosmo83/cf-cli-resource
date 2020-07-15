@@ -443,6 +443,7 @@ echo "$params" | jq -c '.commands[]' | while read -r options; do
     launchpad_blue=$(echo $launchpad_app'-blue')
     cmd1="cf run-task $launchpad_green npm start -m $launchpad_mem"
     cmd2="cf run-task $launchpad_blue npm start -m $launchpad_mem"
+    echo "Running command 1 : $cmd1"
     ( set +e; $cmd1 )
     cmd_status=$?
     [ $cmd_status -eq 0 ] && echo "$cmd1 command was successful" || $cmd2
